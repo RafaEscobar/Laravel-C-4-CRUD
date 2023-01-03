@@ -13,8 +13,16 @@ class CursosGroupController extends Controller
         return view('cursos/create');
     }
 
-    // STORE
+    // STORE -creacion-
     public function store(Request $request){
+
+        $request->validate([
+            'nombre'=>'required',
+            'descripcion'=>'required',
+            'precio'=>'required',
+            'categoria'=>'required',
+        ]);
+
         $registro = new Course();
 
         $registro->nombre = $request->nombre;
@@ -41,6 +49,14 @@ class CursosGroupController extends Controller
     }
 
     public function upgrade(Request $request, Course $id){
+
+        $request->validate([
+            'nombre'=>'required',
+            'descripcion'=>'required',
+            'precio'=>'required',
+            'categoria'=>'required',
+        ]);
+
         $id->nombre = $request->nombre;
         $id->descripcion = $request->descripcion;
         $id->precio = $request->precio;
