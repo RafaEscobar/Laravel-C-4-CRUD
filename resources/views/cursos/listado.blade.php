@@ -18,6 +18,7 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Mostrar</th>
                     <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,13 @@
                           <td>{{$fila->categoria}}</td>
                           <td><a class="btn btn-primary" href="{{route('cursos.show', $fila->id)}}" role="button">Mostrar</a></td>
                           <td><a class="btn btn-primary" href="{{route('cursos.update', $fila->id)}}" role="button">Editar</a></td>
+                          <td>
+                            <form action="{{route('cursos.destroy', $fila->id)}}" method="POST">
+                              @csrf
+                              @method('delete')
+                              <button type="submit" class="btn btn-light">Eliminar</button>
+                            </form>
+                          </td>
                         </tr>
                     @endforeach
                 </tbody>

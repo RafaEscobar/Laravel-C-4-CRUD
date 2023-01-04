@@ -49,4 +49,9 @@ class CursosGroupController extends Controller
 
         return redirect()->route('cursos.show', $id);
     }
+
+    public function destroy(Course $id){
+        $id->delete();
+        return redirect()->route('cursos');
+    }
 }
