@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCourse;
 use App\Models\Course;
 use Illuminate\Http\Request;
+
 
 class CursosGroupController extends Controller
 {
@@ -14,23 +16,9 @@ class CursosGroupController extends Controller
     }
 
     // STORE -creacion-
-    public function store(Request $request){
+    public function store(StoreCourse $request){
 
-        $request->validate([
-            'nombre'=>'required',
-            'descripcion'=>'required',
-            'precio'=>'required',
-            'categoria'=>'required',
-        ]);
-
-        $registro = new Course();
-
-        $registro->nombre = $request->nombre;
-        $registro->descripcion = $request->descripcion;
-        $registro->precio = $request->precio;
-        $registro->categoria = $request->categoria;
-
-        $registro->save();
+        $registro = Course::create($request->all());
 
         return redirect()->route('cursos.show', $registro);
     }
@@ -57,12 +45,7 @@ class CursosGroupController extends Controller
             'categoria'=>'required',
         ]);
 
-        $id->nombre = $request->nombre;
-        $id->descripcion = $request->descripcion;
-        $id->precio = $request->precio;
-        $id->categoria = $request->categoria;
-
-        $id->save();
+        $id->update($request->all());
 
         return redirect()->route('cursos.show', $id);
     }
